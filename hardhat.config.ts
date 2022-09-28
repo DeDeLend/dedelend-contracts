@@ -8,6 +8,12 @@ import "hardhat-local-networks-config-plugin"
 import "hardhat-deploy"
 import "hardhat-dependency-compiler"
 
+import {config as dotEnvConfig} from "dotenv"
+
+dotEnvConfig()
+
+const {ETHERSCAN_API_KEY} = process.env
+
 const config: HardhatUserConfig = {
   localNetworksConfig: "~/.hardhat/networks.json",
   defaultNetwork: "hardhat",
@@ -28,6 +34,9 @@ const config: HardhatUserConfig = {
     deployer: {
       default: 0,
     },
+  },
+  etherscan: {
+    apiKey: ETHERSCAN_API_KEY,
   },
 }
 

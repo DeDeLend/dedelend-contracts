@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: RANDOM_TEXT
+
 pragma solidity 0.8.6;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
@@ -215,6 +217,7 @@ contract DDL is Ownable {
         uint256 profit = profitByOption(id);
         exerciseOption(id);
         uint256 diff = 0;
+        pool.subTotalLocked(data.borrowed);
         if (profit > data.borrowed) {
             diff = profit - data.borrowed;
             USDC.transfer(address(pool), data.borrowed+diff*90/100);
@@ -239,6 +242,7 @@ contract DDL is Ownable {
         uint256 profit = profitByOption(id);
         exerciseOption(id);
         uint256 diff = 0;
+        pool.subTotalLocked(data.borrowed);
         if (profit > data.borrowed) {
             diff = profit - data.borrowed;
             USDC.transfer(address(pool), data.borrowed+diff*90/100);
@@ -260,6 +264,7 @@ contract DDL is Ownable {
         BorrowedByOption storage data = borrowedByOption[id];
         uint256 profit = profitByOption(id);
         exerciseOption(id);
+        pool.subTotalLocked(data.borrowed);
         USDC.transfer(address(pool), data.borrowed);
         USDC.transfer(collateralInfo[id].owner, profit - (data.borrowed + data.borrowed*10/100));
         USDC.transfer(msg.sender, data.borrowed*10/100);

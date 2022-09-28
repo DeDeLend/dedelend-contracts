@@ -1,9 +1,10 @@
+// SPDX-License-Identifier:
 pragma solidity 0.8.6;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract PoolDDL is Ownable, ERC20("Writing DDL", "DDL") {
+contract PoolDDL is Ownable, ERC20("Write DDL", "DDL") {
     uint256 public constant INITIAL_RATE = 1e18;
     uint256 public maxDepositAmount = type(uint256).max;
     mapping(address => bool) public ddlContracts;
